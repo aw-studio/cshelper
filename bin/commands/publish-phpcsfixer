@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+phpcsfixer_filename=".php_cs.dist"
+
+printf "\n${GREEN}Publishing PHP_CS_Fixer config...${RESET}\n"
+# if already exists, but force provided
+if [[ $1 == "--force" ]]
+then
+  cp -rf ${BIN_DIR}/../configs/.php_cs.dist $phpcsfixer_filename
+  printf "Using the force to overwrite existing files.\n"
+elif [ -f "$phpcsfixer_filename" ]
+then
+  printf "${RED}$phpcsfixer_filename already exists.${RESET}\n"
+else
+  cp ${BIN_DIR}/../configs/.php_cs.dist $phpcsfixer_filename
+  printf "Created $phpcsfixer_filename.\n"
+fi

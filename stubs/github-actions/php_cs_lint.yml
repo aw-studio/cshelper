@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+    push:
+        branches: [ main ]
+    pull_request:
+
+jobs:
+    php-cs-fixer:
+        name: PHP-CS-Fixer
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: 7.4
+                  extensions: posix, dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                  coverage: none
+
+            - name: Install dependencies
+              run: composer install --no-interaction --no-suggest --ignore-platform-reqs
+
+            - name: Publish config
+              run: ./vendor/bin/vendor/bin/cshelper publish
+
+            - name: PHP-CS-Fixer lint
+              uses: docker://oskarstark/php-cs-fixer-ga
+              with:
+                  args: --diff --dry-run --using-cache=no --diff-format udiff

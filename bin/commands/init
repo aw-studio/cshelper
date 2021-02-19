@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# ----------------------------------
+# Script
+# ----------------------------------
+
+printf "\n------------------\n"
+printf "\nPublishing default config files...\n"
+. ${BIN_DIR}/commands/publish
+
+printf "\n------------------\n"
+
+printf "\n${GREEN}Adding .php_cs.cache to .gitignore...${RESET}\n"
+
+if grep -q ".php_cs.cache" .gitignore;
+then
+  printf "${RED}Already set.${RESET}\n"
+else
+  echo ".php_cs.cache" >> .gitignore
+  printf "\nAdded.\n"
+fi
+
+printf "\n------------------\n"
+
+printf "\nChecking for GitHub action.\n"
+
+github_command=".github/workflows/php_cs_lint.yml"
+
+if [ -f "$github_command" ]
+then
+  printf "${RED}$github_command already exists.${RESET}\n"
+else
+  echo -n "Would you like a GitHub action added to this repo for running lints? (Y/n) "
+  read addGitHubAction
+
+  if [ "$addGitHubAction" != "${addGitHubAction#[Yy]}" ]
+  then
+    printf "\nAdding GitHub Actions workflow...\n"
+
+    mkdir -p .github/workflows
+    cp ${BIN_DIR}/../stubs/github-commands/php_cs_lint.yml $github_command
+    printf "\nCreated $github_command.\nPlease edit the file if your primary branch is not 'main'.\n"
+  else
+    printf "\n${ORANGE}Skipping GitHub Action.${RESET}\n"
+  fi
+fi

@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+# ----------------------------------
+# Commands
+# ----------------------------------
+# ./bin/vendor/bin/cshelper:                    alias to "help"
+# ./bin/vendor/bin/cshelper help:               list the available commands
+# ./bin/vendor/bin/cshelper init:               initial setup
+# ./bin/vendor/bin/cshelper php lint:           lint php with php-cs-fixer
+# ./bin/vendor/bin/cshelper php fix:            fix php with php-cs-fixer
+# ./bin/vendor/bin/cshelper publish:            publish config files for potential customization
+# ./bin/vendor/bin/cshelper publish --foce:     publish PHP-CS-Fixer file
+
+# ----------------------------------
+# Variables
+# ----------------------------------
+RESET='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+WHITE='\033[1;37m'
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SYM_DIR="$( dirname "$( readlink ${BASH_SOURCE[0]} )" )"
+BIN_DIR="${DIR}/${SYM_DIR}"
+
+# ----------------------------------
+# Script
+# ----------------------------------
+
+## No argument
+if [[ $# == 0 ]]
+then
+  command="help"
+## At least one Argument provided
+elif [[ $1 == "php" ]]
+    then
+        command="php"
+elif [[ $1 == 'init' ]]
+    then
+        command="init"
+elif [[ $1 == 'publish' ]]
+    then
+        command="publish"
+elif [[ $1 == 'help' ]]
+    then
+        command="help"
+else
+    command="$1"
+fi
+
+command_file="$BIN_DIR/commands/$command"
+
+if [ ! -f "$command_file" ]; then
+    printf "\n${RED}Invalid selection.\n[$command_file does not exist]${RESET}\n"
+    ## run help to print available commands
+    . $BIN_DIR/commands/help
+  exit
+fi
+
+# command exists run the command and pass arguments
+. $command_file $2

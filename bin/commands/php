@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ $1 == "fix" ]]
+then
+    . ${BIN_DIR}/commands/php-fix
+elif [[ $1 == "lint" ]]
+then
+    . ${BIN_DIR}/commands/php-lint
+else
+    printf "\n${RED}Invalid argument.${RESET}"
+    printf "\n${ORANGE}Available arguments for PHP:${RESET}"
+    printf "\n-----------------\n"
+    printf "fix\n"
+    printf "lint\n"
+fi
+
+

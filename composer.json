@@ -1,0 +1,18 @@
+{
+    "name": "aw-studio/cshelper",
+    "description": "Alle Wetters PHP CS Fixer config and further defautl coding style configurations.",
+    "require": {
+        "php": "^7.4 | ^8.0",
+        "friendsofphp/php-cs-fixer": "^2.18"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lukas Heller",
+            "email": "lukas@aw-studio.de"
+        }
+    ],
+    "bin": [
+        "bin/cshelper"
+    ]
+}

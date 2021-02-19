@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# ----------------------------------
+# Script
+# ----------------------------------
+
+printf "\n${ORANGE}Available commands:${RESET}"
+printf "\n-----------------\n"
+cat << HelpText
+vendor/bin/cshelper help                lists the available commands
+vendor/bin/cshelper init                initial setup
+vendor/bin/cshelper php lint            lint php with php-cs-fixer
+vendor/bin/cshelper php fix             fix php with php-cs-fixer
+vendor/bin/cshelper publish             publish config files for potential customization
+vendor/bin/cshelper publish --force     publish config files overwriting existing copys
+HelpText
