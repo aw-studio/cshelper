@@ -25,7 +25,7 @@ jobs:
               run: composer install --no-interaction --no-suggest --ignore-platform-reqs
 
             - name: Publish config
-              run: ./vendor/bin/vendor/bin/cshelper publish
+              run: ./vendor/bin/cshelper publish
 
             - name: PHP-CS-Fixer lint
               uses: docker://oskarstark/php-cs-fixer-ga
