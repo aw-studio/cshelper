@@ -38,7 +38,7 @@ else
     printf "\nAdding GitHub Actions workflow...\n"
 
     mkdir -p .github/workflows
-    cp ${BIN_DIR}/../stubs/github-commands/php_cs_lint.yml $github_command
+    cp ${BIN_DIR}/../stubs/github-actions/php_cs_lint.yml $github_command
     printf "\nCreated $github_command.\nPlease edit the file if your primary branch is not 'main'.\n"
   else
     printf "\n${ORANGE}Skipping GitHub Action.${RESET}\n"
