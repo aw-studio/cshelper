@@ -54,7 +54,7 @@ vendor/bin/vendor/bin/cshelper publish --force
 This package is heavily inspired by `tightenco/duster` and `elbgoods/ci-test-tools`. The original idea and structure for this was inspired by their work.
 
 - [Matt Stauffer](https://github.com/mattstauffer)
-- [Tom Witkowski](https://github.com/devgummibeer) 
+- [Tom Witkowski](https://github.com/gummibeer) 
 
 ## License
 
